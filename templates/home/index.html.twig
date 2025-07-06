@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dashboard{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col s6">
+            <h5>Neuen Einsatz erstellen</h5>
+            {{ form_start(eForm) }}
+            <div class="input-field">
+                {{ form_widget(eForm.title) }}
+                {{ form_label(eForm.title) }}
+            </div>
+            <div class="input-field">
+                {{ form_widget(eForm.date) }}
+                {{ form_label(eForm.date) }}
+            </div>
+            <div class="input-field">
+                {{ form_widget(eForm.members) }}
+                {{ form_label(eForm.members) }}
+            </div>
+            <button class="btn waves-effect" type="submit">Erstellen</button>
+            {{ form_end(eForm) }}
+
+            <h5>Neues Mitglied hinzufügen</h5>
+            {{ form_start(mForm) }}
+            <div class="input-field">
+                {{ form_widget(mForm.name) }}
+                {{ form_label(mForm.name) }}
+            </div>
+            <button class="btn waves-effect" type="submit">Hinzufügen</button>
+            {{ form_end(mForm) }}
+        </div>
+
+        <div class="col s6">
+            <h5>Einsätze & Teilnehmer</h5>
+            {% for e in events %}
+                <p><strong>{{ e.date|date('Y-m-d') }} – {{ e.title }}</strong></p>
+                <ul class="collection">
+                    {% for m in e.members %}
+                        <li class="collection-item">{{ m.name }}</li>
+                    {% else %}
+                        <li class="collection-item grey-text">Keine Teilnehmer</li>
+                    {% endfor %}
+                </ul>
+            {% endfor %}
+
+            <h5>Alle Mitglieder</h5>
+            <ul class="collection">
+                {% for m in members %}
+                    <li class="collection-item">{{ m.name }}</li>
+                {% else %}
+                    <li class="collection-item grey-text">Keine Mitglieder</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

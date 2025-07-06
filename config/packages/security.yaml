@@ -1,0 +1,35 @@
+security:
+    password_hashers:
+        App\Entity\User:
+            algorithm: auto
+
+    providers:
+        app_user_provider:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            provider: app_user_provider
+            # erlauben, dass an /login und /register auch Gastnutzer kommen
+            lazy: true
+            custom_authenticator: Symfony\Bundle\SecurityBundle\Security\Authenticator\FormLoginAuthenticator
+            form_login:
+                login_path: login
+                check_path: login
+                authenticator: Symfony\Bundle\SecurityBundle\Security\Authenticator\FormLoginAuthenticator
+            logout:
+                path: logout
+                # nach Logout auf die Login-Seite umleiten
+                target: login_path
+
+    access_control:
+        # Freigabe für Login und Register
+        - { path: ^/(login|register), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        # alles andere nur für eingeloggt
+        - { path: ^/,               roles: ROLE_USER }

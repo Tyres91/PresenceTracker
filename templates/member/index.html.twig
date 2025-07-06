@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+{% block title %}Mitglieder & Einsätze{% endblock %}
+{% block body %}
+    <h4>Mitglieder & ihre Einsätze</h4>
+    <table class="striped">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Einsätze</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for m in members %}
+            <tr>
+                <td>{{ m.name }}</td>
+                <td>{{ m.email }}</td>
+                <td>
+                    {% for att in m.attendances %}
+                        {{ att.event.title }} ({{ att.event.date|date('Y-m-d') }})<br>
+                    {% else %}
+                        —
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

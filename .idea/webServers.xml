@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b6c3f6c3-9859-4404-847b-17447d4feaf0" name="Unraid">
+        <fileTransfer rootFolder="/mnt/user/appdata/swag/www/verein-tracker" accessType="SFTP" host="192.168.178.38" port="22" sshConfigId="a199d61e-b61d-4d2f-b6cc-f69e6a025ee7" sshConfig="root@192.168.178.38:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
