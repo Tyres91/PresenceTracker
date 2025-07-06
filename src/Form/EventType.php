@@ -2,13 +2,13 @@
 namespace App\Form;
 
 use App\Entity\Event;
-use App\Entity\Member;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Member;
 
 class EventType extends AbstractType
 {
@@ -16,12 +16,9 @@ class EventType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, ['label' => 'Titel'])
-            ->add('date', DateType::class, [
-                'widget' => 'single_text',
-                'label'  => 'Datum',
-            ])
-            ->add('members', EntityType::class, [
-                'class'        => Member::class,
+            ->add('date', DateType::class, [ /* … */ ])
+            ->add('members', \Symfony\Bridge\Doctrine\Form\Type\EntityType::class, [
+                'class'        => Event::class === \App\Entity\Member::class ? null : '\App\Entity\Member',
                 'choice_label' => 'name',
                 'multiple'     => true,
                 'expanded'     => false,
@@ -29,6 +26,7 @@ class EventType extends AbstractType
                 'label'        => 'Teilnehmer',
                 'required'     => false,
             ]);
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

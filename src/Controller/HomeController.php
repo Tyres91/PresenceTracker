@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Entity\Event;
@@ -35,7 +36,6 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
 
-        // Daten holen
         $events  = $em->getRepository(Event::class)->findBy([], ['date' => 'DESC']);
         $members = $em->getRepository(Member::class)->findAll();
 

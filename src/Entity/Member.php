@@ -61,4 +61,9 @@ class Member
         }
         return $this;
     }
+
+    public function setEvents(Collection $events): void
+    {
+        $this->events = $events;
+    }
 }
